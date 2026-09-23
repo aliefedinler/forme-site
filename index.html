@@ -9,13 +9,13 @@
 
 <!-- DEPLOYMENT-DEPENDENT: replace https://forme.example.com/ with the live origin
      (e.g. https://forme-debut.pages.dev/) in the three absolute URLs below. -->
-<link rel="canonical" href="https://forme.example.com/">
+<link rel="canonical" href="https://forme-site.pages.dev/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FORME">
 <meta property="og:title" content="FORME — Less noise. More you.">
 <meta property="og:description" content="Unisex essentials with clean lines and an easy fit. Explore the debut collection.">
-<meta property="og:url" content="https://forme.example.com/">
-<meta property="og:image" content="https://forme.example.com/assets/og-cover.jpg">
+<meta property="og:url" content="https://forme-site.pages.dev/">
+<meta property="og:image" content="https://forme-site.pages.dev/assets/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The FORME wordmark beside a photograph of the debut collection worn together.">
@@ -218,6 +218,12 @@ button{font:inherit;color:inherit}
 .product__desc{font-size:14px;color:var(--ink-70);margin-top:var(--s-2);max-width:42ch}
 .js .product__desc{display:none}
 .product__btn{margin-top:var(--s-3)}
+.product__shop{
+  display:inline-block;margin-top:var(--s-2);padding:9px 0;
+  font-size:12px;letter-spacing:.04em;color:var(--stone);
+  text-decoration:none;border-bottom:1px solid var(--line)
+}
+.product__shop:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .collection__note{
   margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--line);
   font-size:12px;line-height:1.7;color:var(--stone);max-width:62ch
@@ -237,6 +243,36 @@ button{font:inherit;color:inherit}
   justify-content:center;gap:var(--s-3)
 }
 .modal__note{font-size:12px;color:var(--stone);margin-top:var(--s-3)}
+.modal__actions{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+
+/* ---------- consent banner ---------- */
+.consent{
+  position:fixed;left:0;right:0;bottom:0;z-index:80;
+  background:var(--ink);color:var(--ivory);
+  padding:var(--s-4) var(--gutter);
+  padding-bottom:calc(var(--s-4) + env(safe-area-inset-bottom,0px))
+}
+.consent__inner{
+  max-width:var(--maxw);margin-inline:auto;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s-3) var(--s-5)
+}
+.consent p{font-size:13px;line-height:1.6;max-width:62ch;color:rgba(245,242,236,.88)}
+.consent__actions{display:flex;flex-wrap:wrap;gap:var(--s-2)}
+.consent .btn{min-height:44px;font-size:12px}
+.consent .btn--accept{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.consent .btn--accept:hover{background:transparent;color:var(--ivory)}
+.consent .btn--decline{border-color:rgba(245,242,236,.5);color:var(--ivory)}
+.consent .btn--decline:hover{background:rgba(245,242,236,.14)}
+.consent :focus-visible{outline-color:var(--ivory)}
+
+.footer__privacy{
+  margin-top:var(--s-4);font-size:12px;line-height:1.7;color:var(--stone);max-width:66ch
+}
+.footer__privacy button{
+  background:none;border:0;padding:0;font-size:12px;color:var(--stone);
+  border-bottom:1px solid var(--line);cursor:pointer
+}
+.footer__privacy button:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .modal__title{font-family:var(--font-display);font-size:clamp(30px,3.6vw,44px);line-height:1.02}
 .modal__price{font-size:17px;font-variant-numeric:tabular-nums}
 .modal__meta{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
@@ -377,7 +413,8 @@ button{font:inherit;color:inherit}
           data-id="essential-tee"
           data-name="Essential Tee"
           data-price="$38"
-          data-colors="Bone / Black"
+          data-colors="Bone"
+          data-shop="https://www.amazon.com/dp/B0DQ6L3VP2"
           data-image="assets/product-essential-tee.jpg"
           data-alt="The Essential Tee in bone, photographed flat on a warm ivory background.">
         <div class="product__media">
@@ -388,16 +425,19 @@ button{font:inherit;color:inherit}
           <h3 class="product__name">Essential Tee</h3>
           <span class="product__price">$38</span>
         </div>
-        <p class="product__colors">Bone / Black</p>
+        <p class="product__colors">Bone</p>
         <p class="product__desc">A midweight jersey tee with a straight body and a set shoulder. Wears clean on its own and lies flat under a layer.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
+        <a class="product__shop" href="https://www.amazon.com/dp/B0DQ6L3VP2" target="_blank" rel="noopener noreferrer"
+           data-event="outbound_product_click" data-source="card" data-product="essential-tee">Shop a similar piece on Amazon</a>
       </li>
 
       <li class="product"
           data-id="everyday-hoodie"
           data-name="Everyday Hoodie"
           data-price="$88"
-          data-colors="Heather Grey / Black"
+          data-colors="Heather Grey"
+          data-shop="https://www.amazon.com/dp/B0C6FZVLV9"
           data-image="assets/product-everyday-hoodie.jpg"
           data-alt="The Everyday Hoodie in heather grey, photographed flat with the hood spread and drawcords centered.">
         <div class="product__media">
@@ -408,16 +448,19 @@ button{font:inherit;color:inherit}
           <h3 class="product__name">Everyday Hoodie</h3>
           <span class="product__price">$88</span>
         </div>
-        <p class="product__colors">Heather Grey / Black</p>
+        <p class="product__colors">Heather Grey</p>
         <p class="product__desc">Brushed fleece with a dropped shoulder and a lined hood. Roomy through the body, ribbed at the cuff and hem.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
+        <a class="product__shop" href="https://www.amazon.com/dp/B0C6FZVLV9" target="_blank" rel="noopener noreferrer"
+           data-event="outbound_product_click" data-source="card" data-product="everyday-hoodie">Shop a similar piece on Amazon</a>
       </li>
 
       <li class="product"
           data-id="relaxed-trouser"
           data-name="Relaxed Trouser"
           data-price="$78"
-          data-colors="Stone / Black"
+          data-colors="Stone"
+          data-shop="https://www.amazon.com/dp/B0FMK4L2NK"
           data-image="assets/product-relaxed-trouser.jpg"
           data-alt="The Relaxed Trouser in stone, photographed flat with a pleated front and wide legs.">
         <div class="product__media">
@@ -428,16 +471,19 @@ button{font:inherit;color:inherit}
           <h3 class="product__name">Relaxed Trouser</h3>
           <span class="product__price">$78</span>
         </div>
-        <p class="product__colors">Stone / Black</p>
+        <p class="product__colors">Stone</p>
         <p class="product__desc">A soft twill trouser with a mid rise, a roomy thigh and a light taper. Sits well over sneakers or boots.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
+        <a class="product__shop" href="https://www.amazon.com/dp/B0FMK4L2NK" target="_blank" rel="noopener noreferrer"
+           data-event="outbound_product_click" data-source="card" data-product="relaxed-trouser">Shop a similar piece on Amazon</a>
       </li>
 
       <li class="product"
           data-id="studio-overshirt"
           data-name="Studio Overshirt"
           data-price="$98"
-          data-colors="Olive / Cream"
+          data-colors="Olive"
+          data-shop="https://www.amazon.com/dp/B0CNTMDQG5"
           data-image="assets/product-studio-overshirt.jpg"
           data-alt="The Studio Overshirt in olive, photographed flat with a point collar and two chest pockets.">
         <div class="product__media">
@@ -448,13 +494,15 @@ button{font:inherit;color:inherit}
           <h3 class="product__name">Studio Overshirt</h3>
           <span class="product__price">$98</span>
         </div>
-        <p class="product__colors">Olive / Cream</p>
+        <p class="product__colors">Olive</p>
         <p class="product__desc">A boxy overshirt in a structured weave. Open as a light layer, buttoned as the whole outfit.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
+        <a class="product__shop" href="https://www.amazon.com/dp/B0CNTMDQG5" target="_blank" rel="noopener noreferrer"
+           data-event="outbound_product_click" data-source="card" data-product="studio-overshirt">Shop a similar piece on Amazon</a>
       </li>
     </ul>
 
-    <p class="collection__note">FORME is a fictional brand created for a graduate digital marketing course. Photography is licensed stand-in imagery and nothing on this page is for sale.</p>
+    <p class="collection__note">FORME is a fictional brand created for a graduate digital marketing course. Nothing on this page is for sale and the prices shown are illustrative. Each “Shop a similar piece” link goes to a comparable garment sold by a third party on Amazon — these are plain links, not affiliate links, and we earn nothing if you buy.</p>
   </section>
 
   <!-- 5. Launch offer -->
@@ -503,8 +551,25 @@ button{font:inherit;color:inherit}
       </nav>
     </div>
     <p class="footer__legal">Student project · Fictional brand · No purchases or payments.</p>
+    <p class="footer__privacy">
+      With your consent we use Google Analytics to count visits and see which parts of this page get
+      used. We do not collect names, emails or payment details, and we do not sell or share data.
+      Decline and no analytics cookie is set. <button type="button" id="consent-reopen">Change your cookie choice</button>
+    </p>
   </div>
 </footer>
+
+<!-- Cookie consent — no analytics script loads until this is accepted -->
+<aside class="consent" id="consent" role="region" aria-label="Cookie choice" hidden>
+  <div class="consent__inner">
+    <p>We would like to use Google Analytics cookies to measure how this page is used. Nothing loads
+      until you choose, and declining still gives you the full site.</p>
+    <div class="consent__actions">
+      <button class="btn btn--accept" type="button" id="consent-accept">Accept analytics</button>
+      <button class="btn btn--decline" type="button" id="consent-decline">Decline</button>
+    </div>
+  </div>
+</aside>
 
 <!-- Product dialog (progressive enhancement; descriptions stay in the page without JS) -->
 <dialog class="modal" id="product-modal" aria-labelledby="modal-title">
@@ -520,9 +585,11 @@ button{font:inherit;color:inherit}
         <p class="modal__meta" id="modal-colors">Bone / Black</p>
         <p class="modal__desc" id="modal-desc"></p>
         <div class="modal__actions">
-          <a class="btn btn--solid" href="#offer" id="modal-offer-link" data-source="product_modal">View Launch Offer</a>
+          <a class="btn btn--solid" id="modal-shop" href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer"
+             data-event="outbound_product_click" data-source="modal">Shop a Similar Piece</a>
+          <a class="btn btn--ghost" href="#offer" id="modal-offer-link" data-source="product_modal">View Launch Offer</a>
         </div>
-        <p class="modal__note">Fictional product · stand-in photography · no purchases on this demo.</p>
+        <p class="modal__note">Fictional product · stand-in photography · the shop link opens a comparable third-party item on Amazon.</p>
       </div>
     </div>
   </div>
@@ -539,21 +606,53 @@ button{font:inherit;color:inherit}
    send() — see README.md ("Connecting real analytics").
    ============================================================ */
 window.FORME = (function () {
+  var GA_ID = 'G-DM67XJS2PV';
+  var STORAGE_KEY = 'forme_consent';
+
   var DEBUG = false;
   try { DEBUG = new URLSearchParams(window.location.search).has('debug'); } catch (e) {}
 
   var events = [];
 
+  /* ---- consent storage (per browser, never leaves the device) ---- */
+  function readConsent() {
+    try { return window.localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+  }
+  function writeConsent(value) {
+    try { window.localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
+  }
+
+  /* ---- GA4 loads only after consent is granted ---- */
+  var gaLoaded = false;
+  function loadGA() {
+    if (gaLoaded) return;
+    gaLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    if (DEBUG) console.info('[FORME debug] GA4 loaded', GA_ID);
+  }
+
   function send(name, payload) {
     var evt = Object.assign({ event: name, at: new Date().toISOString() }, payload || {});
     events.push(evt);
     if (DEBUG) console.info('[FORME debug]', evt.event, evt);
-    /* Connect a real tool here, e.g.:
-       if (window.gtag) gtag('event', name, payload);
-       if (window.plausible) plausible(name, { props: payload });          */
+    if (window.gtag) window.gtag('event', name, payload || {});
   }
 
-  return { track: send, events: events, debug: DEBUG };
+  return {
+    track: send,
+    events: events,
+    debug: DEBUG,
+    gaId: GA_ID,
+    consent: { read: readConsent, write: writeConsent, load: loadGA,
+               get granted() { return gaLoaded; } }
+  };
 })();
 
 (function () {
@@ -565,7 +664,13 @@ window.FORME = (function () {
     var el = e.target.closest('[data-event]');
     if (!el) return;
     if (el.id === 'copy-code') return;           // tracked only on successful copy
-    track(el.getAttribute('data-event'), { source: el.getAttribute('data-source') || null });
+    var payload = { source: el.getAttribute('data-source') || null };
+    var pid = el.getAttribute('data-product');
+    if (pid) { payload.product_id = pid; }
+    if (el.tagName === 'A' && el.href && el.hostname && el.hostname !== window.location.hostname) {
+      payload.destination = el.hostname;
+    }
+    track(el.getAttribute('data-event'), payload);
   });
 
   /* ---------- mobile menu ---------- */
@@ -609,6 +714,9 @@ window.FORME = (function () {
         document.getElementById('modal-price').textContent = card.dataset.price;
         document.getElementById('modal-colors').textContent = card.dataset.colors;
         document.getElementById('modal-desc').textContent = desc ? desc.textContent.trim() : '';
+        var shop = document.getElementById('modal-shop');
+        shop.href = card.dataset.shop;
+        shop.setAttribute('data-product', card.dataset.id);
         var img = document.getElementById('modal-image');
         img.src = card.dataset.image;
         img.alt = card.dataset.alt || '';
@@ -693,6 +801,43 @@ window.FORME = (function () {
         legacyCopy();
       }
     });
+  }
+
+  /* ---------- cookie consent ---------- */
+  var consentBar = document.getElementById('consent');
+  var acceptBtn = document.getElementById('consent-accept');
+  var declineBtn = document.getElementById('consent-decline');
+  var reopenBtn = document.getElementById('consent-reopen');
+  var store = window.FORME.consent;
+
+  function showBar() { if (consentBar) consentBar.hidden = false; }
+  function hideBar() { if (consentBar) consentBar.hidden = true; }
+
+  if (consentBar) {
+    var saved = store.read();
+    if (saved === 'granted') { store.load(); }
+    else if (saved !== 'denied') { showBar(); }
+
+    acceptBtn.addEventListener('click', function () {
+      store.write('granted');
+      store.load();
+      hideBar();
+      track('consent_granted', {});
+      if (reopenBtn) reopenBtn.focus();
+    });
+
+    declineBtn.addEventListener('click', function () {
+      store.write('denied');
+      hideBar();
+      if (reopenBtn) reopenBtn.focus();
+    });
+
+    if (reopenBtn) {
+      reopenBtn.addEventListener('click', function () {
+        showBar();
+        acceptBtn.focus();
+      });
+    }
   }
 
   function legacyCopy() {
