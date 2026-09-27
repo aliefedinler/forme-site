@@ -7,6 +7,10 @@
 <meta name="description" content="FORME makes unisex wardrobe essentials with clean lines and an easy fit. Explore the debut collection and take 15% off your first edit.">
 <meta name="theme-color" content="#F5F2EC">
 
+<!-- AdSense site verification. This tag alone proves ownership; it loads no script
+     and sets no cookie. The ad script itself is consent-gated (see the JS below). -->
+<meta name="google-adsense-account" content="ca-pub-1368713087096295">
+
 <!-- DEPLOYMENT-DEPENDENT: replace https://clothingforme.com/ with the live origin
      (e.g. https://forme-debut.pages.dev/) in the three absolute URLs below. -->
 <link rel="canonical" href="https://clothingforme.com/">
@@ -448,7 +452,7 @@ button{font:inherit;color:inherit}
       <div class="adslot__frame">
         <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
         <ins class="adsbygoogle" style="display:block;width:728px;height:90px"
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-client="ca-pub-1368713087096295"
              data-ad-slot="XXXXXXXXXX"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         -->
@@ -601,7 +605,7 @@ button{font:inherit;color:inherit}
           <div class="adslot__frame">
             <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
             <ins class="adsbygoogle" style="display:block;width:300px;height:250px"
-                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-client="ca-pub-1368713087096295"
                  data-ad-slot="XXXXXXXXXX"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             -->
@@ -686,6 +690,7 @@ button{font:inherit;color:inherit}
    ============================================================ */
 window.FORME = (function () {
   var GA_ID = 'G-DM67XJS2PV';
+  var ADSENSE_ID = 'ca-pub-1368713087096295';
   var STORAGE_KEY = 'forme_consent';
 
   var DEBUG = false;
@@ -717,6 +722,21 @@ window.FORME = (function () {
     if (DEBUG) console.info('[FORME debug] GA4 loaded', GA_ID);
   }
 
+  /* AdSense also waits for consent — it sets advertising cookies.
+     Ownership is proven by the meta tag in <head> and by /ads.txt, neither of
+     which loads anything, so gating this does not affect site verification. */
+  var adsLoaded = false;
+  function loadAds() {
+    if (adsLoaded) return;
+    adsLoaded = true;
+    var a = document.createElement('script');
+    a.async = true;
+    a.crossOrigin = 'anonymous';
+    a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + ADSENSE_ID;
+    document.head.appendChild(a);
+    if (DEBUG) console.info('[FORME debug] AdSense loaded', ADSENSE_ID);
+  }
+
   function send(name, payload) {
     var evt = Object.assign({ event: name, at: new Date().toISOString() }, payload || {});
     events.push(evt);
@@ -729,7 +749,8 @@ window.FORME = (function () {
     events: events,
     debug: DEBUG,
     gaId: GA_ID,
-    consent: { read: readConsent, write: writeConsent, load: loadGA,
+    adsenseId: ADSENSE_ID,
+    consent: { read: readConsent, write: writeConsent, load: loadGA, loadAds: loadAds,
                get granted() { return gaLoaded; } }
   };
 })();
@@ -918,12 +939,13 @@ window.FORME = (function () {
 
   if (consentBar) {
     var saved = store.read();
-    if (saved === 'granted') { store.load(); }
+    if (saved === 'granted') { store.load(); store.loadAds(); }
     else if (saved !== 'denied') { showBar(); }
 
     acceptBtn.addEventListener('click', function () {
       store.write('granted');
       store.load();
+      store.loadAds();
       hideBar();
       track('consent_granted', {});
       if (reopenBtn) reopenBtn.focus();
