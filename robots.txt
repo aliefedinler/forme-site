@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clothingforme.com/sitemap.xml
