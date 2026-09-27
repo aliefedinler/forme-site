@@ -7,15 +7,15 @@
 <meta name="description" content="FORME makes unisex wardrobe essentials with clean lines and an easy fit. Explore the debut collection and take 15% off your first edit.">
 <meta name="theme-color" content="#F5F2EC">
 
-<!-- DEPLOYMENT-DEPENDENT: replace https://forme.example.com/ with the live origin
+<!-- DEPLOYMENT-DEPENDENT: replace https://forme-site.aefedinler.workers.dev/ with the live origin
      (e.g. https://forme-debut.pages.dev/) in the three absolute URLs below. -->
-<link rel="canonical" href="https://forme-site.pages.dev/">
+<link rel="canonical" href="https://forme-site.aefedinler.workers.dev/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FORME">
 <meta property="og:title" content="FORME — Less noise. More you.">
 <meta property="og:description" content="Unisex essentials with clean lines and an easy fit. Explore the debut collection.">
-<meta property="og:url" content="https://forme-site.pages.dev/">
-<meta property="og:image" content="https://forme-site.pages.dev/assets/og-cover.jpg">
+<meta property="og:url" content="https://forme-site.aefedinler.workers.dev/">
+<meta property="og:image" content="https://forme-site.aefedinler.workers.dev/assets/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The FORME wordmark beside a photograph of the debut collection worn together.">
@@ -224,6 +224,43 @@ button{font:inherit;color:inherit}
   text-decoration:none;border-bottom:1px solid var(--line)
 }
 .product__shop:hover{color:var(--ink);border-bottom-color:var(--ink)}
+/* ---------- ad slots ---------- */
+.adslot{margin-inline:auto;text-align:center}
+.adslot__label{
+  display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--stone);margin-bottom:var(--s-2)
+}
+.adslot__frame{
+  margin-inline:auto;display:flex;align-items:center;justify-content:center;
+  background:var(--ivory-2);border:1px solid var(--line);overflow:hidden
+}
+/* Reserve the exact ad size so nothing shifts when the ad loads. */
+.adslot--leaderboard .adslot__frame{width:min(100%,728px);height:90px}
+@media (max-width:767px){
+  .adslot--leaderboard .adslot__frame{width:min(100%,320px);height:100px}
+}
+.adslot--rectangle .adslot__frame{width:300px;height:250px;max-width:100%;margin-inline:0}
+.adslot--rectangle{text-align:left}
+@media (max-width:899px){
+  .adslot--rectangle{text-align:center}
+  .adslot--rectangle .adslot__frame{margin-inline:auto}
+}
+
+.adslot--leaderboard{padding-block:var(--s-6);border-bottom:1px solid var(--line)}
+
+.house{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;width:100%;height:100%;padding:0 var(--s-3);
+  background:var(--ink);color:var(--ivory);text-decoration:none;text-align:center
+}
+.house:hover{background:#2E2C29}
+.house__kicker{font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.house__line{font-family:var(--font-display);font-size:20px;line-height:1.1}
+.house__cta{font-size:11px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid currentColor}
+.adslot--rectangle .house__line{font-size:26px;max-width:22ch}
+
+.story__aside{margin-top:var(--s-6)}
+
 .collection__note{
   margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--line);
   font-size:12px;line-height:1.7;color:var(--stone);max-width:62ch
@@ -401,6 +438,29 @@ button{font:inherit;color:inherit}
 
   <hr class="rule">
 
+  <!-- Ad slot A — leaderboard. Between the hero and the collection — the highest-viewability
+       placement that does not push the headline below the fold.
+       Holds a house ad until/unless AdSense approves the site. -->
+  <div class="wrap">
+    <aside class="adslot adslot--leaderboard" id="ad-leaderboard"
+           data-slot="leaderboard_mid" aria-label="Advertisement">
+      <span class="adslot__label">Advertisement</span>
+      <div class="adslot__frame">
+        <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
+        <ins class="adsbygoogle" style="display:block;width:728px;height:90px"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+        <a class="house" href="#offer" data-event="ad_slot_click" data-slot="leaderboard_mid">
+          <span class="house__kicker">FORME</span>
+          <span class="house__line">15% off your first edit</span>
+          <span class="house__cta">Get the code</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
   <!-- 4. Collection -->
   <section class="section wrap" id="collection" aria-labelledby="collection-title">
     <div class="section-head">
@@ -533,6 +593,25 @@ button{font:inherit;color:inherit}
       <div>
         <p>FORME began with one question: what would you wear if getting dressed took thirty seconds? The answer was short — simple shapes, quiet colors, pieces cut to sit well next to each other.</p>
         <p>Every piece in the debut collection is designed to be worn together, so the decisions are already made by the time you open the closet. Four pieces, styled your way, for the days you actually have.</p>
+
+        <!-- Ad slot B — medium rectangle, in-content. -->
+        <aside class="adslot adslot--rectangle story__aside" id="ad-rectangle"
+               data-slot="rectangle_story" aria-label="Advertisement">
+          <span class="adslot__label">Advertisement</span>
+          <div class="adslot__frame">
+            <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
+            <ins class="adsbygoogle" style="display:block;width:300px;height:250px"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
+            <a class="house" href="#collection" data-event="ad_slot_click" data-slot="rectangle_story">
+              <span class="house__kicker">The debut collection</span>
+              <span class="house__line">Four pieces.<br>One wardrobe.</span>
+              <span class="house__cta">See the edit</span>
+            </a>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -667,6 +746,8 @@ window.FORME = (function () {
     var payload = { source: el.getAttribute('data-source') || null };
     var pid = el.getAttribute('data-product');
     if (pid) { payload.product_id = pid; }
+    var slot = el.getAttribute('data-slot');
+    if (slot) { payload.ad_slot = slot; }
     if (el.tagName === 'A' && el.href && el.hostname && el.hostname !== window.location.hostname) {
       payload.destination = el.hostname;
     }
@@ -758,6 +839,28 @@ window.FORME = (function () {
       });
     }, { threshold: 0.4 });
     io.observe(offer);
+  }
+
+  /* ---------- ad slot viewability ----------
+     Fires once per slot when at least half of it has been on screen.
+     This is a viewable-impression count, not a served-ad count. */
+  if ('IntersectionObserver' in window) {
+    document.querySelectorAll('.adslot').forEach(function (slot) {
+      var seenSlot = false;
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !seenSlot) {
+            seenSlot = true;
+            track('ad_slot_view', {
+              ad_slot: slot.getAttribute('data-slot'),
+              creative: 'house'   // change to 'adsense' once a real unit is live
+            });
+            obs.disconnect();
+          }
+        });
+      }, { threshold: 0.5 });
+      obs.observe(slot);
+    });
   }
 
   var copyBtn = document.getElementById('copy-code');
