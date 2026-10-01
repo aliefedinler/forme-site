@@ -235,9 +235,13 @@ button{font:inherit;color:inherit}
   color:var(--stone);margin-bottom:var(--s-2)
 }
 .adslot__frame{
-  margin-inline:auto;display:flex;align-items:center;justify-content:center;
+  position:relative;margin-inline:auto;display:flex;align-items:center;justify-content:center;
   background:var(--ivory-2);border:1px solid var(--line);overflow:hidden
 }
+/* The house ad sits underneath as backfill. If the network returns an ad it
+   renders on top; if it returns nothing, the house ad shows through. */
+.adslot__frame .house{position:absolute;inset:0;z-index:0}
+.adslot__net{position:absolute;inset:0;z-index:1;border:0;display:block;max-width:100%}
 /* Reserve the exact ad size so nothing shifts when the ad loads. */
 .adslot--leaderboard .adslot__frame{width:min(100%,728px);height:90px}
 @media (max-width:767px){
@@ -448,7 +452,9 @@ button{font:inherit;color:inherit}
        Holds a house ad until/unless AdSense approves the site. -->
   <div class="wrap">
     <aside class="adslot adslot--leaderboard" id="ad-leaderboard"
-           data-slot="leaderboard_mid" aria-label="Advertisement">
+           data-slot="leaderboard_mid" aria-label="Advertisement"
+           data-net-key="734990de7f92266986d0c5fcd9fb784f" data-net-w="728" data-net-h="90"
+           data-net-min="768">
       <span class="adslot__label">Advertisement</span>
       <div class="adslot__frame">
         <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
@@ -601,7 +607,9 @@ button{font:inherit;color:inherit}
 
         <!-- Ad slot B — medium rectangle, in-content. -->
         <aside class="adslot adslot--rectangle story__aside" id="ad-rectangle"
-               data-slot="rectangle_story" aria-label="Advertisement">
+               data-slot="rectangle_story" aria-label="Advertisement"
+               data-net-key="bdcc98dc170d8981846f3b499699fd1f" data-net-w="300" data-net-h="250"
+               data-net-min="0">
           <span class="adslot__label">Advertisement</span>
           <div class="adslot__frame">
             <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
@@ -739,6 +747,44 @@ window.FORME = (function () {
     if (DEBUG) console.info('[FORME debug] AdSense loaded', ADSENSE_ID);
   }
 
+  /* Adsterra banner units. Their snippet writes to a global `atOptions`, so two
+     units on one page would overwrite each other — each is isolated in its own
+     iframe. Loaded only after consent, like every other third-party script. */
+  var netLoaded = false;
+  function loadNetworkAds() {
+    if (netLoaded) return;
+    netLoaded = true;
+    document.querySelectorAll('.adslot[data-net-key]').forEach(function (slot) {
+      var min = parseInt(slot.getAttribute('data-net-min') || '0', 10);
+      if (window.innerWidth < min) return;          // skip units wider than the viewport
+      var frame = slot.querySelector('.adslot__frame');
+      if (!frame) return;
+      var key = slot.getAttribute('data-net-key');
+      var w = slot.getAttribute('data-net-w');
+      var h = slot.getAttribute('data-net-h');
+      var ifr = document.createElement('iframe');
+      ifr.className = 'adslot__net';
+      ifr.width = w; ifr.height = h;
+      ifr.setAttribute('scrolling', 'no');
+      ifr.setAttribute('title', 'Advertisement');
+      ifr.setAttribute('loading', 'lazy');
+      ifr.srcdoc =
+        '<!doctype html><meta charset="utf-8">' +
+        '<style>html,body{margin:0;padding:0;overflow:hidden}</style>' +
+        '<scr' + 'ipt>atOptions={"key":"' + key + '","format":"iframe","height":' + h +
+        ',"width":' + w + ',"params":{}};</scr' + 'ipt>' +
+        '<scr' + 'ipt src="https://www.highrevenueformat.com/' + key + '/invoke.js"></scr' + 'ipt>';
+      frame.appendChild(ifr);
+      slot.setAttribute('data-creative', 'network');
+      window.FORME.track('ad_slot_fill', {
+        ad_slot: slot.getAttribute('data-slot'),
+        creative: 'network',
+        network: 'adsterra'
+      });
+      if (DEBUG) console.info('[FORME debug] network ad injected', slot.getAttribute('data-slot'));
+    });
+  }
+
   function send(name, payload) {
     var evt = Object.assign({ event: name, at: new Date().toISOString() }, payload || {});
     events.push(evt);
@@ -753,7 +799,7 @@ window.FORME = (function () {
     gaId: GA_ID,
     adsenseId: ADSENSE_ID,
     consent: { read: readConsent, write: writeConsent, load: loadGA, loadAds: loadAds,
-               get granted() { return gaLoaded; } }
+               loadNetworkAds: loadNetworkAds, get granted() { return gaLoaded; } }
   };
 })();
 
@@ -876,7 +922,7 @@ window.FORME = (function () {
             seenSlot = true;
             track('ad_slot_view', {
               ad_slot: slot.getAttribute('data-slot'),
-              creative: 'house'   // change to 'adsense' once a real unit is live
+              creative: slot.getAttribute('data-creative') || 'house'
             });
             obs.disconnect();
           }
@@ -941,13 +987,14 @@ window.FORME = (function () {
 
   if (consentBar) {
     var saved = store.read();
-    if (saved === 'granted') { store.load(); store.loadAds(); }
+    if (saved === 'granted') { store.load(); store.loadAds(); store.loadNetworkAds(); }
     else if (saved !== 'denied') { showBar(); }
 
     acceptBtn.addEventListener('click', function () {
       store.write('granted');
       store.load();
       store.loadAds();
+      store.loadNetworkAds();
       hideBar();
       track('consent_granted', {});
       if (reopenBtn) reopenBtn.focus();
