@@ -11,8 +11,6 @@
      and sets no cookie. The ad script itself is consent-gated (see the JS below). -->
 <meta name="google-adsense-account" content="ca-pub-1368713087096295">
 
-<!-- DEPLOYMENT-DEPENDENT: replace https://clothingforme.com/ with the live origin
-     (e.g. https://forme-debut.pages.dev/) in the three absolute URLs below. -->
 <link rel="canonical" href="https://clothingforme.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FORME">
@@ -457,12 +455,6 @@ button{font:inherit;color:inherit}
            data-net-min="768">
       <span class="adslot__label">Advertisement</span>
       <div class="adslot__frame">
-        <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
-        <ins class="adsbygoogle" style="display:block;width:728px;height:90px"
-             data-ad-client="ca-pub-1368713087096295"
-             data-ad-slot="XXXXXXXXXX"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        -->
         <a class="house" href="#offer" data-event="ad_slot_click" data-slot="leaderboard_mid">
           <span class="house__kicker">FORME</span>
           <span class="house__line">15% off your first edit</span>
@@ -612,12 +604,6 @@ button{font:inherit;color:inherit}
                data-net-min="0">
           <span class="adslot__label">Advertisement</span>
           <div class="adslot__frame">
-            <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
-            <ins class="adsbygoogle" style="display:block;width:300px;height:250px"
-                 data-ad-client="ca-pub-1368713087096295"
-                 data-ad-slot="XXXXXXXXXX"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-            -->
             <a class="house" href="#collection" data-event="ad_slot_click" data-slot="rectangle_story">
               <span class="house__kicker">The debut collection</span>
               <span class="house__line">Four pieces.<br>One wardrobe.</span>
@@ -768,12 +754,9 @@ window.FORME = (function () {
       ifr.setAttribute('scrolling', 'no');
       ifr.setAttribute('title', 'Advertisement');
       ifr.setAttribute('loading', 'lazy');
-      ifr.srcdoc =
-        '<!doctype html><meta charset="utf-8">' +
-        '<style>html,body{margin:0;padding:0;overflow:hidden}</style>' +
-        '<scr' + 'ipt>atOptions={"key":"' + key + '","format":"iframe","height":' + h +
-        ',"width":' + w + ',"params":{}};</scr' + 'ipt>' +
-        '<scr' + 'ipt src="https://www.highrevenueformat.com/' + key + '/invoke.js"></scr' + 'ipt>';
+      /* A real same-origin document, not srcdoc: the ad network needs to see
+         clothingforme.com as the hostname, and each file gets its own scope. */
+      ifr.src = '/ads/banner-' + w + 'x' + h + '.html';
       frame.appendChild(ifr);
       slot.setAttribute('data-creative', 'network');
       window.FORME.track('ad_slot_fill', {
