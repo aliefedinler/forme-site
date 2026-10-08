@@ -11,6 +11,8 @@
      and sets no cookie. The ad script itself is consent-gated (see the JS below). -->
 <meta name="google-adsense-account" content="ca-pub-1368713087096295">
 
+<!-- DEPLOYMENT-DEPENDENT: replace https://clothingforme.com/ with the live origin
+     (e.g. https://forme-debut.pages.dev/) in the three absolute URLs below. -->
 <link rel="canonical" href="https://clothingforme.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FORME">
@@ -360,6 +362,54 @@ button{font:inherit;color:inherit}
   max-width:56ch;margin-inline:auto
 }
 
+/* ---------- share ---------- */
+.share{border-top:1px solid var(--line);background:var(--ivory-2)}
+.share__inner{max-width:720px;margin-inline:auto;text-align:center}
+.share h2{margin-bottom:var(--s-3)}
+.share__copy{color:var(--ink-70);margin-bottom:var(--s-6)}
+.share__list{
+  display:flex;flex-wrap:wrap;gap:var(--s-2);justify-content:center;align-items:stretch
+}
+.share__btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:46px;padding:0 22px;border:1px solid var(--ink);background:transparent;
+  font-family:var(--font-sans);font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:500;text-decoration:none;color:var(--ink);cursor:pointer;
+  transition:background-color .18s ease,color .18s ease
+}
+.share__btn:hover{background:var(--ink);color:var(--ivory)}
+/* `display:inline-flex` would otherwise override the hidden attribute, so the
+   copy button must be explicitly hidden until JS un-hides it. */
+.share__btn[hidden]{display:none}
+.share__status{
+  min-height:24px;margin-top:var(--s-3);font-size:13px;letter-spacing:.06em;color:var(--ink-70)
+}
+.share__note{
+  margin-top:var(--s-5);font-size:12px;line-height:1.7;color:var(--stone);
+  max-width:58ch;margin-inline:auto
+}
+@media (max-width:519px){
+  .share__list{flex-direction:column}
+  .share__btn{width:100%}
+}
+
+/* ---------- footer social (no accounts yet — not links) ---------- */
+.footer__social{
+  margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s-2) var(--s-4)
+}
+.footer__social-label{
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)
+}
+.footer__social-list{display:flex;flex-wrap:wrap;gap:var(--s-4)}
+.footer__social-list li{
+  font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-70)
+}
+.footer__social-soon{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);
+  border:1px solid var(--line);padding:3px 10px
+}
+
 /* ---------- story ---------- */
 .story__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px)}
 .story__grid p{color:var(--ink-70);font-size:clamp(16px,1.3vw,18px);max-width:54ch}
@@ -455,6 +505,12 @@ button{font:inherit;color:inherit}
            data-net-min="768">
       <span class="adslot__label">Advertisement</span>
       <div class="adslot__frame">
+        <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
+        <ins class="adsbygoogle" style="display:block;width:728px;height:90px"
+             data-ad-client="ca-pub-1368713087096295"
+             data-ad-slot="XXXXXXXXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
         <a class="house" href="#offer" data-event="ad_slot_click" data-slot="leaderboard_mid">
           <span class="house__kicker">FORME</span>
           <span class="house__line">15% off your first edit</span>
@@ -604,6 +660,12 @@ button{font:inherit;color:inherit}
                data-net-min="0">
           <span class="adslot__label">Advertisement</span>
           <div class="adslot__frame">
+            <!-- AdSense: when approved, delete the house ad below and uncomment this unit.
+            <ins class="adsbygoogle" style="display:block;width:300px;height:250px"
+                 data-ad-client="ca-pub-1368713087096295"
+                 data-ad-slot="XXXXXXXXXX"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            -->
             <a class="house" href="#collection" data-event="ad_slot_click" data-slot="rectangle_story">
               <span class="house__kicker">The debut collection</span>
               <span class="house__line">Four pieces.<br>One wardrobe.</span>
@@ -614,9 +676,45 @@ button{font:inherit;color:inherit}
       </div>
     </div>
   </section>
+
+  <!-- 7. Share — no third-party widget, no SDK, no cookie.
+       Each link is a plain share-intent URL carrying UTM parameters so the
+       returning visit is attributable in GA4 instead of landing in "direct". -->
+  <section class="share section" id="share" aria-labelledby="share-title">
+    <div class="wrap share__inner">
+      <p class="eyebrow">Spread the word</p>
+      <h2 class="h2" id="share-title">Know someone who dresses like this?</h2>
+      <p class="share__copy">Send them the collection.</p>
+
+      <ul class="share__list">
+        <li><a class="share__btn" data-share="facebook" data-source="share_section"
+               href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fclothingforme.com%2F%3Futm_source%3Dfacebook%26utm_medium%3Dsocial%26utm_campaign%3Dshare_button"
+               target="_blank" rel="noopener noreferrer">Facebook</a></li>
+
+        <li><a class="share__btn" data-share="x" data-source="share_section"
+               href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fclothingforme.com%2F%3Futm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dshare_button&amp;text=Less%20noise.%20More%20you.%20%E2%80%94%20the%20FORME%20debut%20collection"
+               target="_blank" rel="noopener noreferrer">X</a></li>
+
+        <li><a class="share__btn" data-share="whatsapp" data-source="share_section"
+               href="https://wa.me/?text=Less%20noise.%20More%20you.%20%E2%80%94%20the%20FORME%20debut%20collection%20https%3A%2F%2Fclothingforme.com%2F%3Futm_source%3Dwhatsapp%26utm_medium%3Dsocial%26utm_campaign%3Dshare_button"
+               target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+
+        <li><a class="share__btn" data-share="email" data-source="share_section"
+               href="mailto:?subject=The%20FORME%20debut%20collection&amp;body=Less%20noise.%20More%20you.%0A%0Ahttps%3A%2F%2Fclothingforme.com%2F%3Futm_source%3Demail%26utm_medium%3Dsocial%26utm_campaign%3Dshare_button">Email</a></li>
+
+        <li><button class="share__btn share__btn--copy" type="button" id="share-copy"
+                    data-share="copy_link" data-source="share_section" hidden>Copy link</button></li>
+      </ul>
+
+      <p class="share__status" id="share-status" role="status" aria-live="polite"></p>
+
+      <p class="share__note">Shared links carry UTM tags so we can tell a shared visit from a direct
+        one. No social plugin, no tracking pixel and no cookie is loaded by these buttons.</p>
+    </div>
+  </section>
 </main>
 
-<!-- 7. Footer -->
+<!-- 8. Footer -->
 <footer class="footer">
   <div class="wrap">
     <div class="footer__grid">
@@ -629,6 +727,18 @@ button{font:inherit;color:inherit}
         <a href="#top">Back to top</a>
       </nav>
     </div>
+    <!-- Social accounts do not exist yet. Shown as plain text, deliberately not
+         clickable, so the page does not link anywhere misleading. -->
+    <div class="footer__social">
+      <span class="footer__social-label">Social</span>
+      <ul class="footer__social-list">
+        <li>Instagram</li>
+        <li>Facebook</li>
+        <li>X</li>
+      </ul>
+      <span class="footer__social-soon">Launching soon</span>
+    </div>
+
     <p class="footer__legal">Student project · Fictional brand · No purchases or payments.</p>
     <p class="footer__privacy">
       With your consent we use Google Analytics to count visits and see which parts of this page get
@@ -954,6 +1064,64 @@ window.FORME = (function () {
         }).catch(function () { legacyCopy(); });
       } else {
         legacyCopy();
+      }
+    });
+  }
+
+  /* ---------- share buttons ----------
+     Plain share-intent links: no SDK, no pixel, no cookie. Every click is
+     recorded as a share_click event with the platform and the placement, so
+     platform mix and placement performance can be reported later. The links
+     work with JavaScript disabled; only "Copy link" needs it, so that button
+     stays hidden until JS is available. */
+  var SHARE_URL = 'https://clothingforme.com/?utm_source=copy_link' +
+                  '&utm_medium=social&utm_campaign=share_button';
+
+  document.querySelectorAll('[data-share]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      track('share_click', {
+        platform: el.getAttribute('data-share'),
+        source: el.getAttribute('data-source'),
+        method: el.tagName === 'A' ? 'share_intent' : 'clipboard'
+      });
+    });
+  });
+
+  var copyBtnShare = document.getElementById('share-copy');
+  var shareStatus = document.getElementById('share-status');
+
+  function shareCopied() {
+    shareStatus.textContent = 'Link copied. Paste it anywhere.';
+    copyBtnShare.textContent = 'Link Copied';
+    window.setTimeout(function () { copyBtnShare.textContent = 'Copy link'; }, 4000);
+  }
+
+  function shareCopyFallback() {
+    var ok = false;
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = SHARE_URL;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) { ok = false; }
+    if (ok) { shareCopied(); }
+    else { shareStatus.textContent = 'Clipboard is blocked here. Copy the address bar instead.'; }
+  }
+
+  if (copyBtnShare) {
+    copyBtnShare.hidden = false;            /* only usable with JS */
+    copyBtnShare.addEventListener('click', function () {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(SHARE_URL)
+          .then(shareCopied)
+          .catch(shareCopyFallback);
+      } else {
+        shareCopyFallback();
       }
     });
   }
