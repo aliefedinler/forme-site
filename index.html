@@ -401,10 +401,14 @@ button{font:inherit;color:inherit}
 .footer__social-label{
   font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)
 }
-.footer__social-list{display:flex;flex-wrap:wrap;gap:var(--s-4)}
+.footer__social-list{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-4)}
 .footer__social-list li{
+  display:inline-flex;align-items:center;gap:8px;
   font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-70)
 }
+/* Official brand marks, supplied by the team and used at a single uniform size.
+   The accounts do not exist yet, so these are images and text — not links. */
+.footer__social-list img{width:22px;height:22px;flex:0 0 22px;object-fit:contain}
 .footer__social-soon{
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);
   border:1px solid var(--line);padding:3px 10px
@@ -732,9 +736,12 @@ button{font:inherit;color:inherit}
     <div class="footer__social">
       <span class="footer__social-label">Social</span>
       <ul class="footer__social-list">
-        <li>Instagram</li>
-        <li>Facebook</li>
-        <li>X</li>
+        <li><img src="assets/social-instagram.png" width="96" height="96" loading="lazy"
+                 decoding="async" alt="Instagram"><span>Instagram</span></li>
+        <li><img src="assets/social-facebook.png" width="96" height="96" loading="lazy"
+                 decoding="async" alt="Facebook"><span>Facebook</span></li>
+        <li><img src="assets/social-x.png" width="96" height="96" loading="lazy"
+                 decoding="async" alt="Twitter"><span>Twitter</span></li>
       </ul>
       <span class="footer__social-soon">Launching soon</span>
     </div>
