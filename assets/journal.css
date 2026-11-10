@@ -51,6 +51,15 @@ button{font:inherit;color:inherit}
   letter-spacing:-.015em;margin-bottom:var(--s-4)}
 .article__disclosure{margin-top:var(--s-2);font-size:12px;color:var(--stone)}
 .article__meta{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone)}
+.article__dek{font-size:clamp(17px,1.8vw,20px);line-height:1.55;color:var(--ink-70);margin-bottom:var(--s-4);max-width:40rem}
+.article__hero{margin:0 0 var(--s-6)}
+.article__hero img{width:100%;height:auto;background:var(--ivory-2)}
+.article__hero figcaption{margin-top:var(--s-2);font-size:12px;color:var(--stone)}
+.sources,.related{margin-top:var(--s-6);padding-top:var(--s-4);border-top:1px solid var(--line)}
+.sources h2,.related h2{font-family:var(--font-display);font-size:26px;line-height:1.15;margin:0 0 var(--s-3);color:var(--ink)}
+.sources li{font-size:15px}
+.related ul{list-style:none;padding-left:0}
+.related li{font-size:16px}
 .prose{max-width:38rem}
 .prose p{margin-bottom:var(--s-4);color:var(--ink-70);font-size:17px}
 .prose h2{font-family:var(--font-display);font-size:clamp(26px,3.2vw,36px);line-height:1.1;

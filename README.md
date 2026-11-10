@@ -18,6 +18,7 @@ from this repository's `main` branch.
 | Oct 8 | Social buttons & data | Share buttons with UTM-tagged URLs |
 | Oct 11 | Your own banner | MyNext banner in the story section |
 | Oct 22 | Affiliate links | Amazon Associates links (tag `formeessentia-20`) on the four products |
+| Nov 10 | Content (blog) | Four new Journal articles: capsule wardrobe, gender-neutral fashion, fall style guide, everyday styling — each with hero image, sources, internal links and affiliate links |
 | Nov 10 | Content & traffic | FORME SPORT page, Brands section, Style Quiz, affiliate disclosure fixed site-wide, journal links switched to affiliate links, new pages tracked |
 
 ## 1. Files
@@ -26,7 +27,7 @@ from this repository's `main` branch.
 index.html                  homepage (markup + CSS + JS in one file)
 sport.html                  FORME SPORT concept collection
 style-quiz.html             7-question style quiz
-journal/                    index + four articles
+journal/                    index + eight articles
 sitemap.xml, robots.txt, ads.txt
 ads/banner-*.html           Adsterra units, each isolated in its own iframe document
 assets/
@@ -119,6 +120,7 @@ progressive JPEG). Originals were 1122×1402; nothing was retouched beyond that.
 | `product-studio-overshirt.jpg` | olive overshirt, flat | **TO FILL** | **TO FILL** | **TO FILL** |
 | `og-cover.jpg` | composite: wordmark + hero photo | derived from the hero image above | — | inherits the hero's license |
 | `forme-sport/*.webp`, `og-sport.jpg` | FORME SPORT campaign image and five product mockups | concept imagery created by the team | FORME team | team-owned |
+| `journal/*-hero.webp`, `journal/og-*.jpg` | Journal article hero images | concept imagery created by the team | FORME team | team-owned |
 | `brands/eot-fatigue-pants-faded-green.webp` | Every Other Thursday Fatigue Pants | everyotherthursday.com product page | Every Other Thursday | brand's own image — credited and linked on the page |
 | `brands/ds-twisted-merino-oat-marl.webp` | Daniel Simmons merino sweater | danielsimmons.co product page | Daniel Simmons | brand's own image — credited and linked on the page |
 
