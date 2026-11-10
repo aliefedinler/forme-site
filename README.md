@@ -136,6 +136,12 @@ should be updated — not deleted.
 4. Add the new source to the table above.
 5. Re-run `python3 tools/prepare_photos.py` after pointing its `JOBS` list at the new files.
 
+### Brand Spotlight
+
+The photos in `assets/brand-ethan-glenn.webp` and `assets/brand-daniel-simmons.webp` were supplied by the project team, which confirmed permission to publish them on FORME. They are used as editorial portraits, not as product imagery.
+
+Founder profiles draw on [Ethan Glenn’s interview with The Quality Edit](https://www.thequalityedit.com/articles/ethan-glenn-quality-makers) and [Daniel Simmons’s interview with END.](https://www.endclothing.com/eu/features/daniel-simmons-interview). The featured pieces link to the [Every Other Thursday Fatigue Pants](https://everyotherthursday.com/products/fatigue-pants?variant=45047153688794) and the [Daniel Simmons Oat Marl Merino Knit Sweater](https://danielsimmons.co/collections/all-products/products/twisted-yarn-merino-knit-sweater-oat-marl).
+
 ---
 
 ## 5. Optimization already in place
