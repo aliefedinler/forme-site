@@ -1,0 +1,11 @@
+FORME SPORT — ISTRUZIONI RAPIDE
+
+1. Estrai questo ZIP sul computer (GitHub non lo estrae da solo).
+2. Nel repository aliefedinler/forme-site carica sport.html e assets/forme-sport/ preservando le altre cartelle.
+3. Per collegare la pagina al menu, modifica index.html seguendo README-FORME-SPORT.md.
+4. Per aggiungere ANCHE il banner di FORME SPORT nella homepage, esegui dal repository:
+   python3 apply_forme_sport.py
+   (il file apply_forme_sport.py va copiato nella radice del repository).
+5. Controlla e pubblica le modifiche tramite GitHub (eventualmente Pull Request) e verifica il deploy.
+
+La collezione originale resta intatta. Nessun pagamento o acquisto è attivo.
