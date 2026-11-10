@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What's Your Minimalist Style? Take the 2-Minute Quiz | FORME</title>
+<meta name="description" content="Find your minimalist clothing style in seven questions. Get your style profile, a color palette, a styling tip and the FORME piece that fits you.">
+<meta name="theme-color" content="#F5F2EC">
+<meta name="google-adsense-account" content="ca-pub-1368713087096295">
+<link rel="canonical" href="https://clothingforme.com/style-quiz.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FORME">
+<meta property="og:title" content="Find your form — the FORME style quiz">
+<meta property="og:description" content="Seven questions, four minimalist styles. Which one are you?">
+<meta property="og:url" content="https://clothingforme.com/style-quiz.html">
+<meta property="og:image" content="https://clothingforme.com/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/journal.css">
+<style>
+.quiz-page{max-width:52rem;padding-block:clamp(40px,6vw,88px) clamp(56px,8vw,112px)}
+.quiz-hero h1{font-family:var(--font-display);font-size:clamp(56px,10vw,104px);line-height:.97;
+  letter-spacing:-.02em;margin-bottom:var(--s-4)}
+.quiz-hero p.lede{font-size:18px;line-height:1.65;color:var(--ink-70);max-width:36rem}
+.quiz-note{margin-top:var(--s-4);font-size:12px;color:var(--stone);letter-spacing:.04em}
+.actions{display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-5)}
+.btn--ghost:hover{background:var(--ink);color:var(--ivory)}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+.progress-top{display:flex;justify-content:space-between;gap:var(--s-3);margin-bottom:var(--s-3);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
+.progress{height:2px;background:var(--line)}
+.bar{height:100%;width:0;background:var(--ink);transition:width .25s ease}
+.question{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);line-height:1.08;
+  margin:var(--s-6) 0 var(--s-5);outline:none}
+.options{display:grid;gap:var(--s-2)}
+.option{display:flex;align-items:center;gap:var(--s-3);width:100%;text-align:left;cursor:pointer;
+  background:transparent;border:1px solid var(--line);padding:16px 18px;line-height:1.5;font-size:15px;
+  transition:background-color .18s ease,border-color .18s ease}
+.option:hover{background:var(--ivory-2);border-color:var(--stone)}
+.option[aria-pressed="true"]{background:var(--ivory-2);border-color:var(--ink)}
+.letter{display:grid;place-items:center;flex:none;width:36px;height:36px;background:var(--ivory-2);
+  font-size:12px;font-weight:500}
+.option[aria-pressed="true"] .letter{background:var(--ink);color:var(--ivory)}
+.result h2{font-family:var(--font-display);font-size:clamp(44px,8vw,80px);line-height:1.02;
+  margin:var(--s-3) 0 var(--s-2);outline:none}
+.result-tag{font-size:11px;letter-spacing:.2em;color:var(--burgundy);font-weight:500}
+.result-desc{font-size:17px;line-height:1.75;color:var(--ink-70);max-width:40rem;margin-top:var(--s-4)}
+.result-grid{display:grid;gap:var(--s-3);margin-top:var(--s-6)}
+@media (min-width:640px){.result-grid{grid-template-columns:1fr 1fr}}
+.panel{background:var(--ivory-2);padding:var(--s-5)}
+.panel h3{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-bottom:var(--s-2)}
+.panel p{font-size:15px;color:var(--ink-70);margin-bottom:var(--s-4)}
+.panel p:last-child{margin-bottom:0}
+.panel .match-name{font-family:var(--font-display);font-size:30px;line-height:1.1;color:var(--ink);margin-bottom:var(--s-3)}
+.match-links{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.match-links a{text-decoration:none;border-bottom:1px solid var(--ink);align-self:flex-start;padding:2px 0}
+.swatches{display:flex;gap:6px;margin-bottom:var(--s-4)}
+.swatches i{height:32px;flex:1}
+.disclosure{margin-top:var(--s-5);font-size:12px;color:var(--stone);max-width:62ch}
+.status{min-height:1.6em;font-size:13px;color:var(--ink-70);margin-top:var(--s-2)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <div class="wrap header__inner">
+    <a class="wordmark" href="index.html" aria-label="FORME — home">FORME</a>
+    <nav aria-label="Primary">
+      <ul class="nav__list">
+        <li><a href="index.html#collection">Collection</a></li>
+        <li><a href="sport.html">Sport</a></li>
+        <li><a href="index.html#brands">Brands</a></li>
+        <li><a href="style-quiz.html" aria-current="page">Style Quiz</a></li>
+        <li><a href="journal/index.html">Journal</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap quiz-page">
+  <section id="intro" class="quiz-hero" aria-labelledby="intro-title">
+    <p class="eyebrow">The FORME style edit · 2-minute quiz</p>
+    <h1 id="intro-title">Find your form.</h1>
+    <p class="lede">Less noise. More you. Seven questions to find the minimalist style that fits your rhythm, your personality and your everyday life.</p>
+    <div class="actions">
+      <button id="start" class="btn btn--solid" type="button">Discover my style</button>
+    </div>
+    <p class="quiz-note">7 questions · 4 styles · No sign-up, no email</p>
+    <noscript><p class="quiz-note">The quiz needs JavaScript. You can still <a href="index.html#collection">browse the collection</a>.</p></noscript>
+  </section>
+
+  <section id="quiz" aria-live="polite" hidden>
+    <div class="progress-top"><span>Find your form</span><span id="counter"></span></div>
+    <div class="progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0" id="progress"><div class="bar" id="bar"></div></div>
+    <h2 class="question" id="question" tabindex="-1"></h2>
+    <div id="options" class="options"></div>
+    <div class="actions">
+      <button id="back" class="btn" type="button">Previous</button>
+      <button id="next" class="btn btn--solid" type="button" disabled>Continue</button>
+    </div>
+  </section>
+
+  <section id="result" class="result" aria-live="polite" hidden>
+    <p class="eyebrow">Your FORME style profile</p>
+    <h2 id="result-title" tabindex="-1"></h2>
+    <p id="result-tag" class="result-tag"></p>
+    <p id="result-desc" class="result-desc"></p>
+    <div class="result-grid">
+      <div class="panel">
+        <h3>Your palette</h3>
+        <div id="swatches" class="swatches" role="img" aria-label="Suggested color palette"></div>
+        <h3>Your wardrobe essentials</h3>
+        <p id="pieces"></p>
+        <h3>Your styling note</h3>
+        <p id="tip"></p>
+      </div>
+      <div class="panel">
+        <h3>Your FORME match</h3>
+        <p class="match-name" id="match"></p>
+        <div class="match-links">
+          <a id="match-collection" href="index.html#collection" data-event="quiz_result_click" data-source="quiz_result">See it in the collection</a>
+          <a id="match-shop" href="index.html#collection" target="_blank" rel="noopener noreferrer sponsored" data-event="outbound_product_click" data-source="quiz_result">Shop a similar piece on Amazon</a>
+        </div>
+        <h3 style="margin-top:var(--s-5)">From FORME SPORT</h3>
+        <div class="match-links">
+          <a id="sport-pick" href="sport.html" data-event="quiz_result_click" data-source="quiz_sport_pick"></a>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="copy" class="btn btn--solid" type="button">Copy my result</button>
+      <button id="retake" class="btn" type="button">Retake quiz</button>
+    </div>
+    <p class="status" id="copy-status" role="status" aria-live="polite"></p>
+    <p class="disclosure">FORME is a fictional brand made for a graduate digital marketing course; nothing here is for sale. The Amazon link is an affiliate link — as an Amazon Associate, FORME earns from qualifying purchases.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <a class="wordmark" href="index.html" aria-label="FORME — home">FORME</a>
+      <nav aria-label="Footer">
+        <ul class="footer__nav">
+          <li><a href="index.html#collection">Collection</a></li>
+          <li><a href="sport.html">Sport</a></li>
+          <li><a href="index.html#brands">Brands</a></li>
+          <li><a href="style-quiz.html">Style Quiz</a></li>
+          <li><a href="journal/index.html">Journal</a></li>
+          <li><a href="index.html#offer">The Offer</a></li>
+          <li><a href="index.html#story">Our Story</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="footer__legal">Student project · Fictional brand · No purchases or payments.</p>
+    <p class="footer__privacy">
+      With your consent we use Google Analytics to count visits and see which parts of this site get
+      used, including which style results come up. Quiz answers stay in your browser — we do not collect
+      names, emails or payment details, and we do not sell or share data.
+      <button type="button" id="consent-reopen">Change your cookie choice</button>
+    </p>
+  </div>
+</footer>
+
+<aside class="consent" id="consent" role="region" aria-label="Cookie choice" hidden>
+  <div class="consent__inner">
+    <p>We would like to use Google Analytics cookies to measure how this page is used. Nothing loads
+      until you choose, and declining still gives you the full site.</p>
+    <div class="consent__actions">
+      <button class="btn btn--accept" type="button" id="consent-accept">Accept analytics</button>
+      <button class="btn btn--decline" type="button" id="consent-decline">Decline</button>
+    </div>
+  </div>
+</aside>
+<script src="assets/forme.js"></script>
+<script>
+(function () {
+  'use strict';
+  var track = (window.FORME && window.FORME.track) || function () {};
+  var styles = {
+    A: { id: 'everyday', name: 'The Everyday Minimalist', tag: 'TIMELESS · SIMPLE · EFFORTLESS',
+      desc: 'You believe the best outfits do not need to be complicated. You value dependable pieces that work naturally together, with a focus on simplicity and versatility.',
+      pieces: 'Classic tees, neutral trousers, clean sneakers and everyday layers.',
+      tip: 'Build a small wardrobe around well-fitting basics in one consistent palette.',
+      product: 'Essential Tee', pid: 'essential-tee', shop: 'https://amzn.to/4z4qsgq',
+      sport: 'Running Short', colors: ['#EAE4D9', '#C8B9A3', '#8C8C84', '#3B3934'] },
+    B: { id: 'comfort', name: 'The Comfort Minimalist', tag: 'SOFT · RELAXED · INTENTIONAL',
+      desc: 'Comfort is part of your personal style. You gravitate toward relaxed fits, easy layers and clothing that feels as good as it looks.',
+      pieces: 'Soft hoodies, relaxed pants, comfortable tees and easy layers.',
+      tip: 'Mix soft textures with relaxed silhouettes for a calm, cohesive look.',
+      product: 'Everyday Hoodie', pid: 'everyday-hoodie', shop: 'https://amzn.to/4ixvUkX',
+      sport: 'Quarter-Zip Sport Sweatshirt', colors: ['#F1EADF', '#D0C6B7', '#A5AA9B', '#595650'] },
+    C: { id: 'modern', name: 'The Modern Minimalist', tag: 'CLEAN · CONFIDENT · REFINED',
+      desc: 'You love a streamlined look where every detail has a purpose. Thoughtful proportions and coordinated colors help you feel polished without trying too hard.',
+      pieces: 'Monochrome basics, clean-cut trousers, structured tops and refined layers.',
+      tip: 'Create contrast through fit and proportion instead of loud patterns.',
+      product: 'Relaxed Trouser', pid: 'relaxed-trouser', shop: 'https://amzn.to/4sgqvmv',
+      sport: 'Relaxed Sport Pant', colors: ['#222222', '#595955', '#A9A8A3', '#E9E8E2'] },
+    D: { id: 'creative', name: 'The Creative Minimalist', tag: 'VERSATILE · EXPRESSIVE · EFFORTLESS',
+      desc: 'You see minimalism as a foundation for self-expression. You enjoy layering and subtle details that make everyday outfits feel personal.',
+      pieces: 'Overshirts, relaxed trousers, versatile basics and subtle accessories.',
+      tip: 'Experiment with texture and layers while keeping your color palette simple.',
+      product: 'Studio Overshirt', pid: 'studio-overshirt', shop: 'https://amzn.to/3VIWTSR',
+      sport: 'Retro Soccer Jersey', colors: ['#DED6C7', '#9B9B89', '#777E77', '#49443F'] }
+  };
+  var questions = [
+    ['What’s your ideal everyday outfit?', 'A classic tee, straight-leg trousers and clean sneakers.', 'An oversized hoodie, relaxed pants and comfortable shoes.', 'A monochrome outfit with structured, well-fitted pieces.', 'A simple tee layered with an overshirt and relaxed trousers.'],
+    ['Which color palette do you reach for most?', 'Timeless neutrals: white, beige and gray.', 'Soft, muted shades: oatmeal, cream and sage.', 'Monochrome: black, white and charcoal.', 'Earthy tones: olive, stone, navy and brown.'],
+    ['What matters most when choosing clothes?', 'Timelessness — pieces I can wear year after year.', 'Comfort — clothes that feel as good as they look.', 'Clean design, sharp silhouettes and thoughtful details.', 'Versatility — pieces I can mix, match and layer.'],
+    ['How do you want your clothes to make you feel?', 'Effortlessly put-together.', 'Relaxed and comfortable.', 'Confident and polished.', 'Creative and individual.'],
+    ['What does your typical day look like?', 'A mix of work, errands and downtime.', 'A slower, more laid-back pace.', 'A busy, goal-oriented routine.', 'Creative projects, exploring and seeing people.'],
+    ['Which wardrobe essential would you choose first?', 'A perfectly fitted cotton T-shirt.', 'A soft, oversized hoodie.', 'A pair of clean-cut, relaxed trousers.', 'A versatile overshirt for layering.'],
+    ['What’s your approach to personal style?', 'Keep it simple, consistent and timeless.', 'Prioritize comfort and easy silhouettes.', 'Focus on fit, proportion and refined details.', 'Experiment with layering and subtle personal touches.']
+  ];
+  var keys = ['A', 'B', 'C', 'D'];
+  var $ = function (id) { return document.getElementById(id); };
+  var index = 0, answers = new Array(questions.length).fill(null), current = null;
+
+  function show(id) {
+    ['intro', 'quiz', 'result'].forEach(function (k) { $(k).hidden = (k !== id); });
+    window.scrollTo(0, 0);
+  }
+  function render() {
+    var q = questions[index];
+    $('counter').textContent = 'Question ' + (index + 1) + ' / ' + questions.length;
+    $('bar').style.width = ((index + 1) / questions.length * 100) + '%';
+    $('progress').setAttribute('aria-valuenow', String(index + 1));
+    $('question').textContent = q[0];
+    $('options').replaceChildren();
+    keys.forEach(function (k, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'option';
+      b.setAttribute('aria-pressed', String(answers[index] === k));
+      var l = document.createElement('span'); l.className = 'letter'; l.textContent = k;
+      var t = document.createElement('span'); t.textContent = q[i + 1];
+      b.append(l, t);
+      b.addEventListener('click', function () { answers[index] = k; render(); $('next').focus(); });
+      $('options').append(b);
+    });
+    $('back').style.visibility = index === 0 ? 'hidden' : 'visible';
+    $('next').disabled = !answers[index];
+    $('next').textContent = index === questions.length - 1 ? 'See my style' : 'Continue';
+  }
+  function finish() {
+    var scores = {}; keys.forEach(function (k) { scores[k] = answers.filter(function (a) { return a === k; }).length; });
+    var max = Math.max.apply(null, keys.map(function (k) { return scores[k]; }));
+    var winner = answers.find(function (a) { return scores[a] === max; });   /* tie → earliest answer */
+    var s = current = styles[winner];
+    $('result-title').textContent = s.name;
+    $('result-tag').textContent = s.tag;
+    $('result-desc').textContent = s.desc;
+    $('pieces').textContent = s.pieces;
+    $('tip').textContent = s.tip;
+    $('match').textContent = s.product;
+    $('swatches').replaceChildren();
+    s.colors.forEach(function (c) { var i = document.createElement('i'); i.style.backgroundColor = c; $('swatches').append(i); });
+    var col = $('match-collection');
+    col.href = 'index.html#product-' + s.pid; col.textContent = 'See the ' + s.product + ' in the collection';
+    col.setAttribute('data-product', s.pid);
+    var shop = $('match-shop');
+    shop.href = s.shop; shop.setAttribute('data-product', s.pid);
+    var sp = $('sport-pick');
+    sp.textContent = s.sport + ' — see FORME SPORT';
+    $('copy-status').textContent = '';
+    track('quiz_complete', { quiz_style: s.id, matched_product: s.pid });
+    show('result');
+    $('result-title').focus({ preventScroll: true });
+  }
+
+  $('start').addEventListener('click', function () {
+    index = 0; answers.fill(null); show('quiz'); render();
+    $('question').focus({ preventScroll: true });
+    track('quiz_start', {});
+  });
+  $('back').addEventListener('click', function () {
+    if (index > 0) { index--; render(); $('question').focus({ preventScroll: true }); }
+  });
+  $('next').addEventListener('click', function () {
+    if (!answers[index]) return;
+    if (index < questions.length - 1) { index++; render(); $('question').focus({ preventScroll: true }); }
+    else finish();
+  });
+  $('retake').addEventListener('click', function () {
+    index = 0; answers.fill(null); show('intro'); $('start').focus();
+    track('quiz_retake', { quiz_style: current ? current.id : null });
+  });
+  $('copy').addEventListener('click', function () {
+    if (!current) return;
+    var text = 'My FORME style: ' + current.name + '\n' + current.tag + '\nMy FORME match: ' + current.product +
+      '\nFind yours: https://clothingforme.com/style-quiz.html?utm_source=copy_link&utm_medium=referral&utm_campaign=style_quiz';
+    var done = function (ok) {
+      $('copy-status').textContent = ok ? 'Copied — paste it anywhere.' : 'Copy is not available in this browser.';
+      if (ok) track('quiz_result_copy', { quiz_style: current.id });
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else { done(false); }
+  });
+})();
+</script>
+</body>
+</html>

@@ -442,6 +442,49 @@ button{font:inherit;color:inherit}
 .mynext-banner img{display:block;width:300px;height:250px;max-width:none}
 .mynext-banner__cta{position:absolute;left:6.7%;top:76.8%;width:53.4%;height:16%;border-radius:999px;z-index:2;cursor:pointer}
 .mynext-banner__cta:focus-visible{outline:3px solid #fff;outline-offset:-3px}
+
+/* ---------- quiz prompt under the collection ---------- */
+.collection__quiz{margin-top:var(--s-3);font-size:15px;color:var(--ink-70)}
+.collection__quiz a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink)}
+
+/* ---------- FORME SPORT teaser ---------- */
+.sport-teaser{display:grid;grid-template-columns:1.15fr .85fr;background:#172849;color:var(--ivory)}
+.sport-teaser__copy{align-self:center;padding:clamp(48px,7vw,104px) var(--gutter);padding-left:max(var(--gutter),calc((100vw - var(--maxw))/2 + var(--gutter)))}
+.sport-teaser__copy .eyebrow{color:#C9CFDA}
+.sport-teaser__copy h2{font-family:var(--font-display);font-style:italic;font-weight:400;
+  font-size:clamp(52px,6.5vw,92px);line-height:1;margin:0 0 var(--s-3)}
+.sport-teaser__copy p:not(.eyebrow){font-size:16px;line-height:1.75;max-width:40ch;margin:0 0 var(--s-5);
+  color:rgba(245,242,236,.9)}
+.sport-teaser .btn{background:var(--ivory);border-color:var(--ivory);color:var(--ink)}
+.sport-teaser .btn:hover{background:transparent;color:var(--ivory)}
+.sport-teaser__media{margin:0;background:#2b2d30}
+.sport-teaser__media img{width:100%;height:100%;max-height:620px;object-fit:cover;object-position:center 12%}
+@media (max-width:760px){
+  .sport-teaser{grid-template-columns:1fr}
+  .sport-teaser__media{order:-1}
+  .sport-teaser__media img{max-height:420px}
+}
+
+/* ---------- Brands we're watching ---------- */
+.brands__head .h2{margin-bottom:var(--s-3)}
+.brands__intro{max-width:52ch;color:var(--ink-70);font-size:16px}
+.brands__grid{display:grid;gap:clamp(24px,3.5vw,48px);grid-template-columns:1fr;list-style:none;margin:var(--s-6) 0 0;padding:0}
+@media (min-width:640px){.brands__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.brand-card__photo{margin:0}
+.brand-card__photo > a{display:block;aspect-ratio:1/1;overflow:hidden;background:var(--ivory-2)}
+.brand-card__photo img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.brand-card__photo > a:hover img{transform:scale(1.02)}
+.brand-card__credit{margin-top:var(--s-1);font-size:11px;letter-spacing:.04em;color:var(--stone)}
+.brand-card__credit a{color:var(--stone)}
+.brand-card__name{font-family:var(--font-display);font-weight:400;font-size:clamp(30px,3.4vw,42px);line-height:1.05;margin:var(--s-4) 0 var(--s-2)}
+.brand-card p{color:var(--ink-70);font-size:15px}
+.brand-card__featured{margin-top:var(--s-4);padding-top:var(--s-3);border-top:1px solid var(--line)}
+.brand-card .brand-card__label{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--burgundy);margin:0 0 4px}
+.brand-card .brand-card__piece{font-family:var(--font-display);font-weight:400;font-size:24px;line-height:1.15;margin:0 0 4px}
+.brand-card__link{display:inline-flex;align-items:center;min-height:44px;font-size:12px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--ink)}
+.brand-card__link:hover{color:var(--burgundy);border-bottom-color:var(--burgundy)}
+.brands__note{margin-top:var(--s-5);padding-top:var(--s-3);border-top:1px solid var(--line);font-size:12px;color:var(--stone);max-width:70ch}
 </style>
 </head>
 <body>
@@ -470,8 +513,9 @@ button{font:inherit;color:inherit}
     <nav class="nav" id="site-menu" aria-label="Primary">
       <ul class="nav__list">
         <li><a href="#collection">Collection</a></li>
-        <li><a href="#offer">The Offer</a></li>
-        <li><a href="#story">Our Story</a></li>
+        <li><a href="sport.html">Sport</a></li>
+        <li><a href="#brands">Brands</a></li>
+        <li><a href="style-quiz.html">Style Quiz</a></li>
         <li><a href="journal/index.html">Journal</a></li>
       </ul>
       <a class="btn btn--solid nav__cta" href="#collection" data-event="collection_cta_click" data-source="header">Explore Collection</a>
@@ -538,7 +582,7 @@ button{font:inherit;color:inherit}
     </div>
 
     <ul class="grid-products">
-      <li class="product"
+      <li class="product" id="product-essential-tee"
           data-id="essential-tee"
           data-name="Essential Tee"
           data-price="$38"
@@ -557,11 +601,11 @@ button{font:inherit;color:inherit}
         <p class="product__colors">Bone</p>
         <p class="product__desc">A midweight jersey tee with a straight body and a set shoulder. Wears clean on its own and lies flat under a layer.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
-        <a class="product__shop" href="https://amzn.to/4z4qsgq" target="_blank" rel="noopener noreferrer"
+        <a class="product__shop" href="https://amzn.to/4z4qsgq" target="_blank" rel="noopener noreferrer sponsored"
            data-event="outbound_product_click" data-source="card" data-product="essential-tee">Shop a similar piece on Amazon</a>
       </li>
 
-      <li class="product"
+      <li class="product" id="product-everyday-hoodie"
           data-id="everyday-hoodie"
           data-name="Everyday Hoodie"
           data-price="$88"
@@ -580,11 +624,11 @@ button{font:inherit;color:inherit}
         <p class="product__colors">Heather Grey</p>
         <p class="product__desc">Brushed fleece with a dropped shoulder and a lined hood. Roomy through the body, ribbed at the cuff and hem.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
-        <a class="product__shop" href="https://amzn.to/4ixvUkX" target="_blank" rel="noopener noreferrer"
+        <a class="product__shop" href="https://amzn.to/4ixvUkX" target="_blank" rel="noopener noreferrer sponsored"
            data-event="outbound_product_click" data-source="card" data-product="everyday-hoodie">Shop a similar piece on Amazon</a>
       </li>
 
-      <li class="product"
+      <li class="product" id="product-relaxed-trouser"
           data-id="relaxed-trouser"
           data-name="Relaxed Trouser"
           data-price="$78"
@@ -603,11 +647,11 @@ button{font:inherit;color:inherit}
         <p class="product__colors">Stone</p>
         <p class="product__desc">A soft twill trouser with a mid rise, a roomy thigh and a light taper. Sits well over sneakers or boots.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
-        <a class="product__shop" href="https://amzn.to/4sgqvmv" target="_blank" rel="noopener noreferrer"
+        <a class="product__shop" href="https://amzn.to/4sgqvmv" target="_blank" rel="noopener noreferrer sponsored"
            data-event="outbound_product_click" data-source="card" data-product="relaxed-trouser">Shop a similar piece on Amazon</a>
       </li>
 
-      <li class="product"
+      <li class="product" id="product-studio-overshirt"
           data-id="studio-overshirt"
           data-name="Studio Overshirt"
           data-price="$98"
@@ -626,12 +670,27 @@ button{font:inherit;color:inherit}
         <p class="product__colors">Olive</p>
         <p class="product__desc">A boxy overshirt in a structured weave. Open as a light layer, buttoned as the whole outfit.</p>
         <button class="btn btn--ghost btn--block product__btn" type="button" data-open-product>View Details</button>
-        <a class="product__shop" href="https://amzn.to/3VIWTSR" target="_blank" rel="noopener noreferrer"
+        <a class="product__shop" href="https://amzn.to/3VIWTSR" target="_blank" rel="noopener noreferrer sponsored"
            data-event="outbound_product_click" data-source="card" data-product="studio-overshirt">Shop a similar piece on Amazon</a>
       </li>
     </ul>
 
-    <p class="collection__note">FORME is a fictional brand created for a graduate digital marketing course. Nothing on this page is for sale and the prices shown are illustrative. Each “Shop a similar piece” link goes to a comparable garment sold by a third party on Amazon — these are plain links, not affiliate links, and we earn nothing if you buy.</p>
+    <p class="collection__note">FORME is a fictional brand created for a graduate digital marketing course. Nothing on this page is for sale and the prices shown are illustrative. Each “Shop a similar piece” link goes to a comparable garment sold by a third party on Amazon. <strong>These are affiliate links: as an Amazon Associate, FORME earns from qualifying purchases.</strong></p>
+    <p class="collection__quiz">Not sure where to start? <a href="style-quiz.html" data-event="quiz_cta_click" data-source="collection">Take the 2-minute style quiz</a> and find the piece that fits you.</p>
+  </section>
+
+  <!-- 4b. FORME SPORT teaser -->
+  <section class="sport-teaser" id="forme-sport" aria-labelledby="sport-teaser-title">
+    <div class="sport-teaser__copy">
+      <p class="eyebrow">A new direction</p>
+      <h2 id="sport-teaser-title">Forme Sport.</h2>
+      <p>Sport in its own form. Retro-inspired movement pieces, made for your everyday rotation.</p>
+      <a class="btn" href="sport.html" data-event="sport_cta_click" data-source="home_teaser">Explore FORME SPORT</a>
+    </div>
+    <figure class="sport-teaser__media">
+      <img src="assets/forme-sport/court-portrait.webp" width="570" height="790" loading="lazy" decoding="async"
+           alt="A model on an outdoor soccer court wearing the ivory Retro Soccer Jersey and navy Relaxed Sport Pant.">
+    </figure>
   </section>
 
   <!-- 5. Launch offer -->
@@ -653,6 +712,56 @@ button{font:inherit;color:inherit}
         with other offers. Purchases are not available on this demo.
       </p>
     </div>
+  </section>
+
+  <!-- 5b. Brands we're watching — editorial picks, linked and credited -->
+  <section class="section wrap" id="brands" aria-labelledby="brands-title">
+    <div class="brands__head">
+      <p class="eyebrow">Brands we're watching</p>
+      <h2 class="h2" id="brands-title">Up &amp; coming brands.</h2>
+      <p class="brands__intro">Two creator-founded labels with a minimalist, luxury-minded take on everyday wear — the same less-noise approach we build FORME around.</p>
+    </div>
+    <ul class="brands__grid">
+      <li class="brand-card">
+        <figure class="brand-card__photo">
+          <a href="https://everyotherthursday.com/products/fatigue-pants?variant=45047153688794" target="_blank" rel="noopener noreferrer"
+             data-event="outbound_brand_click" data-source="brands_photo" data-product="eot-fatigue-pants" aria-label="Every Other Thursday Fatigue Pants (opens the brand’s store in a new tab)">
+            <img src="assets/brands/eot-fatigue-pants-faded-green.webp" width="800" height="1000" loading="lazy" decoding="async"
+                 alt="Every Other Thursday’s Fatigue Pants in Faded Green, front view.">
+          </a>
+          <figcaption class="brand-card__credit">Photo: <a href="https://everyotherthursday.com/" target="_blank" rel="noopener noreferrer">Every Other Thursday</a></figcaption>
+        </figure>
+        <h3 class="brand-card__name">Every Other Thursday</h3>
+        <p>Ethan Glenn built a following on TikTok and started Every Other Thursday as an Instagram moodboard. The label reworks classic Americana with relaxed proportions and premium fabrics.</p>
+        <div class="brand-card__featured">
+          <p class="brand-card__label">Featured piece</p>
+          <p class="brand-card__piece">Fatigue Pants · Faded Green</p>
+          <p>High-rise cotton trousers with wide legs and utility pockets.</p>
+          <a class="brand-card__link" href="https://everyotherthursday.com/products/fatigue-pants?variant=45047153688794" target="_blank" rel="noopener noreferrer"
+             data-event="outbound_brand_click" data-source="brands_link" data-product="eot-fatigue-pants">View on Every Other Thursday ↗</a>
+        </div>
+      </li>
+      <li class="brand-card">
+        <figure class="brand-card__photo">
+          <a href="https://danielsimmons.co/products/twisted-yarn-merino-knit-sweater-oat-marl" target="_blank" rel="noopener noreferrer"
+             data-event="outbound_brand_click" data-source="brands_photo" data-product="ds-merino-knit" aria-label="Daniel Simmons Twisted Yarn Merino Knit Sweater (opens the brand’s store in a new tab)">
+            <img src="assets/brands/ds-twisted-merino-oat-marl.webp" width="800" height="1000" loading="lazy" decoding="async"
+                 alt="Daniel Simmons’s Oat Marl merino knit sweater on a wooden hanger.">
+          </a>
+          <figcaption class="brand-card__credit">Photo: <a href="https://danielsimmons.co/" target="_blank" rel="noopener noreferrer">Daniel Simmons</a></figcaption>
+        </figure>
+        <h3 class="brand-card__name">Daniel Simmons</h3>
+        <p>Daniel Simmons built an audience reviewing and styling clothes online, then brought that eye for fit to his own label — relaxed tailoring and textured knits that give everyday staples a luxury feel.</p>
+        <div class="brand-card__featured">
+          <p class="brand-card__label">Featured piece</p>
+          <p class="brand-card__piece">Twisted Yarn Merino Knit Sweater</p>
+          <p>An Oat Marl merino crewneck with dropped shoulders and a boxy, cropped fit.</p>
+          <a class="brand-card__link" href="https://danielsimmons.co/products/twisted-yarn-merino-knit-sweater-oat-marl" target="_blank" rel="noopener noreferrer"
+             data-event="outbound_brand_click" data-source="brands_link" data-product="ds-merino-knit">View on Daniel Simmons ↗</a>
+        </div>
+      </li>
+    </ul>
+    <p class="brands__note">Independent editorial picks — not sponsored, not affiliate links. Photos belong to each brand and link to their own stores.</p>
   </section>
 
   <!-- 6. Brand story -->
@@ -729,9 +838,12 @@ button{font:inherit;color:inherit}
       <a class="wordmark" href="#top" aria-label="FORME — back to top">FORME</a>
       <nav class="footer__nav" aria-label="Footer">
         <a href="#collection">Collection</a>
+        <a href="sport.html">Sport</a>
+        <a href="#brands">Brands</a>
+        <a href="style-quiz.html">Style Quiz</a>
+        <a href="journal/index.html">Journal</a>
         <a href="#offer">The Offer</a>
         <a href="#story">Our Story</a>
-        <a href="journal/index.html">Journal</a>
         <a href="#top">Back to top</a>
       </nav>
     </div>
@@ -785,11 +897,11 @@ button{font:inherit;color:inherit}
         <p class="modal__meta" id="modal-colors">Bone / Black</p>
         <p class="modal__desc" id="modal-desc"></p>
         <div class="modal__actions">
-          <a class="btn btn--solid" id="modal-shop" href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer"
+          <a class="btn btn--solid" id="modal-shop" href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer sponsored"
              data-event="outbound_product_click" data-source="modal">Shop a Similar Piece</a>
           <a class="btn btn--ghost" href="#offer" id="modal-offer-link" data-source="product_modal">View Launch Offer</a>
         </div>
-        <p class="modal__note">Fictional product · stand-in photography · the shop link opens a comparable third-party item on Amazon.</p>
+        <p class="modal__note">Fictional product · stand-in photography · the shop link is an Amazon affiliate link to a comparable third-party item; FORME earns from qualifying purchases.</p>
       </div>
     </div>
   </div>

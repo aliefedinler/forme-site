@@ -1,35 +1,43 @@
-# FORME — Initial Website
+# FORME — clothingforme.com
 
-Single-page storefront prototype for MKT 9780 (Digital Marketing, Baruch/Zicklin, Fall 2026),
-week 3 deliverable: *Initial website built*.
+Group website for MKT 9780 (Digital Marketing, Baruch/Zicklin, Fall 2026). Started as the
+week-3 *Initial website built* deliverable and updated weekly; current state as of **Nov 10, 2026**.
 
-**FORME is a fictional brand.** Nothing on the page can be purchased, and the photography is
-stand-in imagery, not pictures of FORME products. Semantic HTML, CSS and vanilla JavaScript
-only — no frameworks, no build step, no API keys, no backend.
+**FORME is a fictional brand.** Nothing on the site can be purchased. Semantic HTML, CSS and
+vanilla JavaScript only — no frameworks, no build step, no backend. Deployed by Cloudflare Pages
+from this repository's `main` branch.
 
----
+## Change log (site updates by week)
+
+| Date | Course week | Change |
+|---|---|---|
+| Sep 15–17 | Initial website | Homepage, four-piece collection, launch offer, brand story |
+| Sep 23 | Content & traffic | GA4 behind a consent banner; event tracking |
+| Sep 28 | SEO / content | Journal: four articles with Article structured data; sitemap, robots.txt |
+| Sep 27–Oct 1 | AdSense or alternative | Ad slots, `ads.txt`, AdSense (pending) + Adsterra backup, house ads |
+| Oct 8 | Social buttons & data | Share buttons with UTM-tagged URLs |
+| Oct 11 | Your own banner | MyNext banner in the story section |
+| Oct 22 | Affiliate links | Amazon Associates links (tag `formeessentia-20`) on the four products |
+| Nov 10 | Content & traffic | FORME SPORT page, Brands section, Style Quiz, affiliate disclosure fixed site-wide, journal links switched to affiliate links, new pages tracked |
 
 ## 1. Files
 
 ```
-index.html                 the entire site (markup + CSS + JS in one file)
-README.md                  this file
+index.html                  homepage (markup + CSS + JS in one file)
+sport.html                  FORME SPORT concept collection
+style-quiz.html             7-question style quiz
+journal/                    index + four articles
+sitemap.xml, robots.txt, ads.txt
+ads/banner-*.html           Adsterra units, each isolated in its own iframe document
 assets/
-  hero-debut-collection.jpg    1100×1375  hero image
-  product-essential-tee.jpg     800×1000  4:5 product image
-  product-everyday-hoodie.jpg   800×1000
-  product-relaxed-trouser.jpg   800×1000
-  product-studio-overshirt.jpg  800×1000
-  og-cover.jpg                 1200×630   Open Graph / social share card
-  favicon.svg
+  forme.js                  consent gate + event tracking for every page except the homepage
+  journal.css               shared styles for Journal, Sport and Quiz pages
+  hero-debut-collection.jpg, product-*.jpg, og-cover.jpg, banner-mynext.jpg, social-*.png
+  forme-sport/              FORME SPORT imagery (WebP) + og-sport.jpg share card
+  brands/                   brand product photos (WebP), credited and linked on the page
 tools/
-  prepare_photos.py         crops/compresses supplied photography into /assets
-  make_assets.py            regenerates illustrated flats, if photography is ever pulled
-  check.js                  automated layout/interaction checks (Node + Playwright)
+  prepare_photos.py, make_assets.py, check.js
 ```
-
-Total page weight: **~560 KB** including all images. All asset paths are relative, so the
-site works from a local file, a subfolder, or a domain root without edits.
 
 ---
 
@@ -110,6 +118,9 @@ progressive JPEG). Originals were 1122×1402; nothing was retouched beyond that.
 | `product-relaxed-trouser.jpg` | stone trouser, flat | **TO FILL** | **TO FILL** | **TO FILL** |
 | `product-studio-overshirt.jpg` | olive overshirt, flat | **TO FILL** | **TO FILL** | **TO FILL** |
 | `og-cover.jpg` | composite: wordmark + hero photo | derived from the hero image above | — | inherits the hero's license |
+| `forme-sport/*.webp`, `og-sport.jpg` | FORME SPORT campaign image and five product mockups | concept imagery created by the team | FORME team | team-owned |
+| `brands/eot-fatigue-pants-faded-green.webp` | Every Other Thursday Fatigue Pants | everyotherthursday.com product page | Every Other Thursday | brand's own image — credited and linked on the page |
+| `brands/ds-twisted-merino-oat-marl.webp` | Daniel Simmons merino sweater | danielsimmons.co product page | Daniel Simmons | brand's own image — credited and linked on the page |
 
 **Fill this table before the site is published or the report is submitted.** The professor
 requires sourcing and attribution in standard academic format, and "images from the internet"
@@ -153,53 +164,33 @@ should be updated — not deleted.
 
 ---
 
-## 6. Measurement foundation
+## 6. Measurement
 
-Four events are instrumented through one helper, `window.FORME.track(name, payload)`:
+GA4 (`G-DM67XJS2PV`) loads on every page **only after the visitor accepts** the consent banner.
+The homepage has its own inline copy of the logic; every other page uses `assets/forme.js`. Any
+element with `data-event` is tracked by one delegated click listener (`data-source`,
+`data-product` and the outbound hostname are sent as parameters).
 
-| Event | Fires when | Payload |
+| Event | Where | Parameters |
 |---|---|---|
-| `collection_cta_click` | any "Explore Collection" CTA is clicked | `source`: `announcement` / `header` / `hero_primary` |
-| `product_detail_view` | a product dialog opens | `product_id`, `product_name` |
-| `offer_view` | the offer section is ≥40% visible — **once per page view** | `code` |
-| `offer_code_copy` | **only after the copy actually succeeds** | `code`, `method` |
+| `collection_cta_click` | any "Explore Collection" CTA | `source` |
+| `product_detail_view` | product dialog opens (homepage and Sport) | `product_id`, `source` |
+| `offer_view` / `offer_code_copy` | launch offer seen / code copied | `code` |
+| `outbound_product_click` | Amazon affiliate link (cards, dialog, journal, quiz) | `product_id`, `source`, `destination` |
+| `outbound_brand_click` | Brands section photo or link | `product_id`, `source`, `destination` |
+| `sport_cta_click` | links into FORME SPORT | `source` |
+| `quiz_cta_click` | links into the quiz | `source` |
+| `quiz_start` / `quiz_complete` | quiz started / finished | `quiz_style`, `matched_product` |
+| `quiz_result_click`, `quiz_result_copy`, `quiz_retake` | actions on the result screen | `quiz_style`, `product_id` |
+| `article_read_complete` | reader reaches the end of a journal article | `slug` |
+| `ad_slot_view` / `ad_slot_click` / `ad_slot_fill` | ad inventory | `slot`, `network` |
+| `consent_granted` | visitor accepts analytics | — |
 
-CTAs carry `data-event` and `data-source` attributes and are captured by a single delegated
-click listener, so adding a new tracked CTA means adding the attributes — no new JavaScript.
-
-**These are console logs, not analytics.** Nothing is sent anywhere, nothing is stored, and no
-visitor data is collected. Events are held in `window.FORME.events` for the current page view and
-printed only when `?debug=1` is present. Any number we report to the class must come from a real
-analytics tool, not from this array.
-
-### Connecting real analytics later
-
-In `index.html`, find the `send()` function inside the `window.FORME` block. The hook is marked:
-
-```js
-/* Connect a real tool here, e.g.:
-   if (window.gtag) gtag('event', name, payload);
-   if (window.plausible) plausible(name, { props: payload });          */
-```
-
-Uncomment one line and add that tool's snippet in `<head>`. Recommended for this course:
-**Google Analytics 4** (free, gives the acquisition/engagement reports the final performance
-report asks for) plus **Google Search Console** (impressions, clicks, average position, queries —
-the SEO evidence for the Sep 17 week). Cloudflare Web Analytics is a cookie-free alternative that
-needs no consent banner.
-
-Once connected, these four custom events become the KPIs we can actually report:
-
-| Metric | Formula | What it tells us |
-|---|---|---|
-| Collection click-through rate | `collection_cta_click` ÷ sessions | does the hero message earn a click |
-| Product interest | `product_detail_view` per session, by `product_id` | which of the four pieces pulls attention |
-| Offer engagement | `offer_view` ÷ sessions | how many visitors reach the offer at all |
-| Code-copy rate | `offer_code_copy` ÷ `offer_view` | conversion intent on the offer itself |
-| Source mix | `source` on `collection_cta_click` | which CTA placement earns the click |
-
-Traffic, cost and revenue for the final report come from GA4 plus the ad platforms we add in
-later weeks. **Do not report any figure the tools did not produce.**
+KPIs for the performance report: sessions and users by source/medium (UTMs on share and quiz
+links), collection CTR, product interest by `product_id`, quiz start → complete rate and style
+mix, outbound affiliate CTR (compare with clicks in the Amazon Associates report), brand clicks,
+article completion rate, consent rate. Visitors who decline cookies are not counted, so GA4
+undercounts real traffic — state this in the report. **Do not report any figure the tools did not produce.**
 
 ### Evidence to save every week (for the Dec 3 presentation)
 
